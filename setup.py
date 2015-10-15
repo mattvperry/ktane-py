@@ -1,6 +1,6 @@
 from setuptools import setup
 
-setup(name='ktane_py',
+setup(name='ktane-py',
       version='0.1',
       description='Module solver for Keep Talking and Nobody Explodes',
       url='https://github.com/mattvperry/ktane_py',
