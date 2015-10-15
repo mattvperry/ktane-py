@@ -8,6 +8,8 @@ setup(name='ktane-py',
       author_email='muffinman616@gmail.com',
       license='MIT',
       packages=['ktane'],
-      scripts=['bin/ktane'],
+      entry_points = {
+          'console_scripts': ['ktane=ktane.command_line:main']
+      },
       zip_safe=False)
 
