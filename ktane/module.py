@@ -1,2 +1,2 @@
-class Module:
+﻿class Module(object):
     pass
