@@ -1,4 +1,5 @@
 ﻿from ktane import Module
+from ktane import command_line
 
 class SimpleWires(Module):
 
@@ -11,14 +12,19 @@ class SimpleWires(Module):
       colors = {'white', 'red', 'blue', 'yellow', 'black'}
       
       # Get wires from user
-      wires = input('input wire colors separated by a space. Enter q to quit\n').split(' ')
-      numWires = len(wires)
-
-      # Kick out if our wire list is too short or long or if we have any invalid wires
-      if not 3 <= len(wires) <= 6 or False in map(lambda w: w in colors, wires):
-        self.run()
+      wires = command_line.get_valid_input_or_quit(
+        lambda wStr: all([w in colors for w in wStr.split(' ')]) and 3 <= len(wStr.split(' ')) <= 6, 
+        'Input wire colors separated by a space.'
+        )
+      
+      # If our input test returned None, the user is quitting. Else, continue
+      if wires == None:
         return
+      else:
+        wires = wires.split(' ')
 
+      numWires = len(wires)
+      
       # Fire the correct method depending on number of wires
       self.moduleType[numWires](self,wires)
 
