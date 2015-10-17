@@ -1,4 +1,6 @@
-import ktane
+from .module import Module
 
 def main():
-      print('test')
+    test = Module()
+    print(test)
+    print('test')
