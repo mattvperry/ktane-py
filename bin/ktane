@@ -1,5 +1,6 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
+
 import ktane
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     ktane.main()
