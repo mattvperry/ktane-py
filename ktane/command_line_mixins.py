@@ -30,12 +30,6 @@ class CommandLineMixins(object):
             user_input = input("Invalid input. Try again:\n")
         return None if user_input.lower() == 'q' else user_input
 
-    def output_and_wait(self, message, *args):
-        print()
-        print(message.format(*args))
-        print()
-        input('Press enter to continue...')
-
     def cls(self):
         os.system(['clear', 'cls'][os.name == 'nt'])
 
