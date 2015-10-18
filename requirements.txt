@@ -1,3 +1,2 @@
--e git://github.com/mattvperry/python-readchar.git@bbce5f486dc793fe2b999a6f05441d7dde39a3b9#egg=readchar-master
 inflection==0.3.1
 pyfiglet==0.7.4

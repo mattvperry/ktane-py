@@ -24,6 +24,11 @@ class CommandLineMixins(object):
             message)
         return None if user_input is None else int(user_input)
 
+    def get_string_or_quit(self, length_range, message):
+        return self.get_valid_input_or_quit(
+            lambda x: x.isalpha() and len(x) in length_range, 
+            message)
+
     def get_valid_input_or_quit(self, validator, message):
         user_input = input('{} (q to quit):\n'.format(message))
         while user_input.lower() != 'q' and not validator(user_input):
@@ -32,4 +37,3 @@ class CommandLineMixins(object):
 
     def cls(self):
         os.system(['clear', 'cls'][os.name == 'nt'])
-
