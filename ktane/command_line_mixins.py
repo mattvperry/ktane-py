@@ -2,7 +2,8 @@
 
 class CommandLineMixins(object):
     def get_choice_or_quit(self, choices):
-        [print('{}. {}'.format(i + 1, x)) for (i, x) in enumerate(sorted(choices))]
+        choices.sort()
+        [print('{}. {}'.format(i + 1, x)) for (i, x) in enumerate(choices)]
         print()
         choice = self.get_number_or_quit(
             lambda x: x in range(1, len(choices) + 1),
