@@ -1,2 +1,3 @@
-﻿from .module import Module
-from .command_line import main
+﻿from .command_line_mixins import CommandLineMixins
+from .module import Module
+from .console_app import ConsoleApp

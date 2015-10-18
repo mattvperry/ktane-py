@@ -23,7 +23,10 @@
     <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ktane\command_line.py" />
+    <Compile Include="ktane\console_app.py" />
+    <Compile Include="ktane\command_line_mixins.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ktane\module.py" />
     <Compile Include="ktane\modules\buttons.py" />
     <Compile Include="ktane\modules\complicated_wires.py" />

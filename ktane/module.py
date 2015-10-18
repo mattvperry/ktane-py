@@ -1,6 +1,4 @@
-﻿import os
+﻿from ktane import CommandLineMixins
 
-class Module(object):
-  # Method definition for clearing the console window
-  def clear(self):
-    os.system('cls')
+class Module(CommandLineMixins):
+    pass
