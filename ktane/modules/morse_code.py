@@ -61,9 +61,9 @@ class MorseCode(Module):
         for chars in self.__get_char_stream():
             if chars is None:
                 return None
-            words = [x for x in self.frequencies.keys() if chars in (x + x)]
-            if len(words) == 1:
-                return self.frequencies[words[0]]
+            freqs = [v for k, v in self.frequencies.items() if chars in (k + k)]
+            if len(freqs) == 1:
+                return freqs[0]
 
     def __get_char_stream(self):
         chars = ""
