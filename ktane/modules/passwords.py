@@ -11,34 +11,21 @@ class Passwords(Module):
              'where', 'which', 'world', 'would', 'write']
 
     def run(self):
-        answer = self.solve()
+        answer = self.stream_solve(self.__get_chars_or_quit, self.__solve)
         if answer is None:
             return
 
         self.output_and_wait("The answer is: {}", answer)
 
-    def solve(self):
-        for chars in self.__get_char_stream():
-            if chars is None:
-                return None
-            words = self.words
-            columns = self.__chunk_six(chars)
-            for i, col in enumerate(columns):
-                words = [word for word in words if word[i] in col]
-            if len(words) == 1:
-                return words[0]
+    def __get_chars_or_quit(self):
+        return self.get_string_or_quit(range(6, 31), 'Enter up to 30 characters.')
 
-    def __get_char_stream(self):
-        inputs = ""
-        while True:
-            chars = self.get_string_or_quit(
-                range(6, 31),
-                'Enter up to 30 characters.')
-            if chars is None:
-                yield None
-            else:
-                inputs += chars
-                yield inputs
+    def __solve(self, chars):
+        words = self.words
+        columns = self.__chunk_six(chars)
+        for i, col in enumerate(columns):
+            words = [word for word in words if word[i] in col]
+        return words
 
     def __chunk_six(self, chars):
         return [chars[i:i + 6] for i in range(0, len(chars), 6)]

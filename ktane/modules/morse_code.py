@@ -51,29 +51,13 @@ class MorseCode(Module):
     }
     
     def run(self):
-        answer = self.solve()
+        answer = self.stream_solve(
+            self.__get_morse_or_quit,
+            lambda cs: [v for k, v in self.frequencies.items() if cs in (k + k)])
         if answer is None:
             return
 
         self.output_and_wait("Respond at frequency: 3.{} MHz", answer)
-
-    def solve(self):
-        for chars in self.__get_char_stream():
-            if chars is None:
-                return None
-            freqs = [v for k, v in self.frequencies.items() if chars in (k + k)]
-            if len(freqs) == 1:
-                return freqs[0]
-
-    def __get_char_stream(self):
-        chars = ""
-        while True:
-            char = self.__get_morse_or_quit()
-            if char is None:
-                yield None
-            else:
-                chars += char
-                yield chars
 
     def __get_morse_or_quit(self):
         morse_chars = self.get_list_or_quit(

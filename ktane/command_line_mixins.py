@@ -32,10 +32,10 @@ class CommandLineMixins(object):
             message)
 
     def get_valid_input_or_quit(self, validator, message):
-        user_input = input('{} (q to quit):\n'.format(message))
-        while user_input.lower() != 'q' and not validator(user_input):
+        user_input = input('{} (q to quit):\n'.format(message)).lower()
+        while user_input != 'q' and not validator(user_input):
             user_input = input("Invalid input. Try again:\n")
-        return None if user_input.lower() == 'q' else user_input
+        return None if user_input == 'q' else user_input
 
     def cls(self):
         os.system(['clear', 'cls'][os.name == 'nt'])
