@@ -1,4 +1,4 @@
-﻿mazes = [
+﻿maze_data = [
 # Maze One
 """
 . . .|. . .

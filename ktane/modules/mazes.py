@@ -1,16 +1,35 @@
 ﻿from ktane import Module
 from itertools import chain
-from .maze_data import mazes
+from .maze_data import maze_data
 
 class Mazes(Module):
 
     def run(self):
-        maze = Maze(mazes[0])
-        print(maze)
-        path = self.find_shortest_path(maze.as_graph(), (0, 0), (5, 5))
-        print(path)
-        print(maze.as_string_with_path(path))
-        input()
+        mazes = map(Maze, maze_data)
+        identifier_coords = self.get_coord_or_quit('identifier')
+        if identifier_coords is None: return
+
+        mazes = [x for x in mazes if x.is_identifier(identifier_coords)]
+        if not mazes:
+            self.output_and_wait('No maze has that identifier.')
+            return
+
+        start = self.get_coord_or_quit('start')
+        if start is None: return
+
+        end = self.get_coord_or_quit('end')
+        if end is None: return
+
+        maze = mazes[0] 
+        path = self.find_shortest_path(maze.as_graph(), start, end)
+        self.output_and_wait(maze.as_string_with_path(path))
+
+    def get_coord_or_quit(self, kind):
+        coords = self.get_list_or_quit(
+            lambda x: x.isdigit() and int(x) in range(6),
+            range(2, 3),
+            'Enter x and y coord of {} seperated by a space.'.format(kind))
+        return None if coords is None else tuple(map(int, coords))
 
     def find_shortest_path(self, graph, start, end, path=[]):
         path = path + [start]
@@ -54,6 +73,9 @@ class Maze(object):
         wall_y = (to_point[1] - from_point[1]) + 2 * from_point[1]
         wall_point = (wall_x, wall_y)
         return self.__point_in_bounds(wall_point) and not self.__is_wall(self.__get_cell(wall_point))
+
+    def is_identifier(self, point):
+        return self.__get_cell(tuple(i * 2 for i in point)) == 'O'
 
     def __point_in_bounds(self, point):
         return point[0] in range(len(self.matrix[0])) and point[1] in range(len(self.matrix))
