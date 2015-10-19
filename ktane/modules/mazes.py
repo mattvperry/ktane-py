@@ -1,4 +1,4 @@
-from ktane import Module
+﻿from ktane import Module
 from itertools import chain
 from .maze_data import mazes
 
