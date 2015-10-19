@@ -32,6 +32,9 @@
     <Compile Include="ktane\modules\complicated_wires.py" />
     <Compile Include="ktane\modules\keypads.py" />
     <Compile Include="ktane\modules\mazes.py" />
+    <Compile Include="ktane\modules\maze_data.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ktane\modules\memory.py" />
     <Compile Include="ktane\modules\morse_code.py" />
     <Compile Include="ktane\modules\passwords.py" />
