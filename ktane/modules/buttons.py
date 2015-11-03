@@ -1,6 +1,7 @@
 ﻿from enum import Enum
 from ktane import Module
 
+
 class Color(Enum):
     white = 1
     blue = 2
@@ -26,6 +27,7 @@ class Indicator(Enum):
     TRN = 9
     BOB = 10
     FRK = 11
+
 
 # Module for "The Button". The logic for lit indicators
 # and batteries is likely better placed outside of this
@@ -73,7 +75,7 @@ class Buttons(Module):
 
         # Case 3
         if (color is Color.white and "CAR" in self.get_lit_indicators()):
-              return self.hold()
+            return self.hold()
 
         # Case 4
         if (self.get_batteries() > 2 and "FRK" in self.get_lit_indicators()):
@@ -126,11 +128,11 @@ class Buttons(Module):
     # Function to get list of lit indicators from user
     def get_lit_indicators(self):
         if (self.lit_indicators == []):
-            indics = [ x.upper() for x in self.get_list_or_quit(
+            indics = [x.upper() for x in self.get_list_or_quit(
                 lambda x: x.upper() in Indicator.__members__.keys(),
                 range(0, 99),
                 "Enter all lit indicators separated by spaces: "
-                ) ]
+                )]
             self.lit_indicators = indics
             return self.lit_indicators
         else:
