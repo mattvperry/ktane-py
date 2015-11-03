@@ -36,7 +36,7 @@ class Indicator(Enum):
 class Buttons(Module):
 
     # Number of Batteries
-    batteries = 0
+    batteries = -1
 
     # Lit indicators
     lit_indicators = []
@@ -44,7 +44,7 @@ class Buttons(Module):
     def run(self):
 
         # Reset Number of Batteries
-        self.batteries = 0
+        self.batteries = -1
 
         # Reset Lit indicators
         self.lit_indicators = []
@@ -111,7 +111,7 @@ class Buttons(Module):
 
     # Function to get number of batteries from user
     def get_batteries(self):
-        if (self.batteries is 0):
+        if (self.batteries is -1):
             batts = self.get_number_or_quit(
                 lambda x: x >= 0,
                 "Enter number of batteries: "
