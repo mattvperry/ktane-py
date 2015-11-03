@@ -41,7 +41,7 @@ class Buttons(Module):
     batteries = -1
 
     # Lit indicators
-    lit_indicators = []
+    lit_indicators = ['None']
 
     # Entry point for the module
     def run(self):
@@ -50,7 +50,7 @@ class Buttons(Module):
         self.batteries = -1
 
         # Reset Lit indicators
-        self.lit_indicators = []
+        self.lit_indicators = ['None']
 
         # Get the button
         color = Color[self.get_valid_input_or_quit(
@@ -127,7 +127,7 @@ class Buttons(Module):
 
     # Function to get list of lit indicators from user
     def get_lit_indicators(self):
-        if (self.lit_indicators == []):
+        if (self.lit_indicators[0] is 'None'):
             indics = [x.upper() for x in self.get_list_or_quit(
                 lambda x: x.upper() in Indicator.__members__.keys(),
                 range(0, 99),
