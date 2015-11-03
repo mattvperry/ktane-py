@@ -41,6 +41,7 @@ class Buttons(Module):
     # Lit indicators
     lit_indicators = []
 
+    # Entry point for the module
     def run(self):
 
         # Reset Number of Batteries
@@ -60,6 +61,7 @@ class Buttons(Module):
 
         self.output_and_wait(self.apply_logic(color, text))
 
+    # Function to apply the logic for solving the button based on inputs
     def apply_logic(self, color, text):
         # Case 1
         if (color is Color.blue and text is Text.abort):
