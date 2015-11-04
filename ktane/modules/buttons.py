@@ -37,20 +37,14 @@ class Indicator(Enum):
 # with every function call (which defeats the purpose).
 class Buttons(Module):
 
-    # Number of Batteries
-    batteries = -1
-
-    # Lit indicators
-    lit_indicators = ['None']
-
     # Entry point for the module
     def run(self):
 
         # Reset Number of Batteries
-        self.batteries = -1
+        self.batteries = None
 
         # Reset Lit indicators
-        self.lit_indicators = ['None']
+        self.lit_indicators = None
 
         # Get the button
         color = Color[self.get_valid_input_or_quit(
@@ -74,11 +68,11 @@ class Buttons(Module):
             return self.press_and_release()
 
         # Case 3
-        if (color is Color.white and "CAR" in self.get_lit_indicators()):
+        if (color is Color.white and Indicator.CAR in self.get_lit_indicators()):
             return self.hold()
 
         # Case 4
-        if (self.get_batteries() > 2 and "FRK" in self.get_lit_indicators()):
+        if (self.get_batteries() > 2 and Indicator.FRK in self.get_lit_indicators()):
             return self.press_and_release()
 
         # Case 5
@@ -97,10 +91,9 @@ class Buttons(Module):
         return "Press and immediately release the button"
 
     def hold(self):
-        print ('\nHold the button...\n')
         stripe = Color[self.get_valid_input_or_quit(
             lambda x: x.lower() in Color.__members__.keys(),
-            "Enter the color of the the stripe: ")]
+            "\nHold the button...\nEnter the color of the the stripe: ")]
 
         return "Release when the timer has a {} in any position".format(self.get_stripe_number(stripe))
 
@@ -115,25 +108,21 @@ class Buttons(Module):
 
     # Function to get number of batteries from user
     def get_batteries(self):
-        if (self.batteries is -1):
+        if (self.batteries is None):
             batts = self.get_number_or_quit(
                 lambda x: x >= 0,
                 "Enter number of batteries: "
                 )
             self.batteries = batts
-            return self.batteries
-        else:
-            return self.batteries
+        return self.batteries
 
     # Function to get list of lit indicators from user
     def get_lit_indicators(self):
-        if (self.lit_indicators[0] is 'None'):
+        if (self.lit_indicators is None):
             indics = [x.upper() for x in self.get_list_or_quit(
                 lambda x: x.upper() in Indicator.__members__.keys(),
                 range(0, 99),
                 "Enter all lit indicators separated by spaces: "
                 )]
             self.lit_indicators = indics
-            return self.lit_indicators
-        else:
-            return self.lit_indicators
+        return self.lit_indicators
